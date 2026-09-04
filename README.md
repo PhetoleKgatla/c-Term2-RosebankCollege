@@ -6,3 +6,4 @@
 5.Hard coded all the entities within the ERD Schema and their attributes in addition also their relationship using keys
 8.Added the API endpoints for all the entities within my ERD Schema
 9.Final SQL Snippet(Database Code) for RaceDay Event
+10.Final Submission for the ERD, ENDPOINTS, and SQL Snippet
