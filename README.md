@@ -5,3 +5,4 @@
 4.Added attributes for the remaining entities which are HISTORY, PATICIPANTS, and CATEGORIES.
 5.Hard coded all the entities within the ERD Schema and their attributes in addition also their relationship using keys
 8.Added the API endpoints for all the entities within my ERD Schema
+9.Final SQL Snippet(Database Code) for RaceDay Event
