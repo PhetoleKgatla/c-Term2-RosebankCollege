@@ -9,3 +9,4 @@
 10.Final Submission for the ERD, ENDPOINTS, and SQL Snippet
 11.classified "Organiser" and "Participant" Entities as "User", then added role and password as attributes
 12.Created Models for each entity
+13.Fixed the Data class and added Register DTO
