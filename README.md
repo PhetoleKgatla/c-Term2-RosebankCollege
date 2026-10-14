@@ -7,3 +7,4 @@
 8.Added the API endpoints for all the entities within my ERD Schema
 9.Final SQL Snippet(Database Code) for RaceDay Event
 10.Final Submission for the ERD, ENDPOINTS, and SQL Snippet
+11.Created Models for each entity
