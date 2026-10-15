@@ -1,19 +1,28 @@
-﻿
-namespace RaceDay.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RaceDayAPI.Models
 {
+    [Table("ENROLMENT")]
     public class Enrolment
     {
-        public int EnrolmentId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int EnrolmentID { get; set; }
 
-        public int EventId { get; set; }
+        [Required]
+        public int EventID { get; set; }
 
-        // The participant is stored as a User
-        public int UserId { get; set; }
+        [Required]
+        public int ParticipantID { get; set; }
 
-        public int OrganiserId { get; set; }
+        [Required]
+        public int OrganiserID { get; set; }
 
-        public int CategoryId { get; set; }
+        [Required]
+        public int CategoryID { get; set; }
 
-        public DateTime EnrolDate { get; set; } = DateTime.UtcNow;
+        [Required, MaxLength(9)]
+        public string EnrolDate { get; set; } = string.Empty;
     }
 }

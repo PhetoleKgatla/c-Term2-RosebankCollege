@@ -1,13 +1,22 @@
-﻿namespace RaceDay.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RaceDayAPI.Models
 {
+    [Table("HISTORY")]
     public class History
     {
-        public int HistoryId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int HistoryID { get; set; }
 
-        public int ResultId { get; set; }
+        [Required]
+        public int ResultID { get; set; }
 
-        public int UserId { get; set; }
+        [Required]
+        public int ParticipantID { get; set; }
 
-        public DateTime ViewDate { get; set; } = DateTime.UtcNow;
+        [Required, MaxLength(9)]
+        public string ViewDate { get; set; } = string.Empty;
     }
 }
