@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDayAPI.Data;
@@ -18,6 +19,7 @@ namespace RaceDayAPI.Controllers
         }
 
         // GET: api/History
+        [Authorize(Roles = "Organiser")]
         [HttpGet]
         public async Task<IActionResult> GetHistory()
         {
@@ -26,6 +28,7 @@ namespace RaceDayAPI.Controllers
         }
 
         // GET: api/History/1
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetHistoryRecord(int id)
         {
@@ -41,6 +44,7 @@ namespace RaceDayAPI.Controllers
         }
 
         // GET: api/History/participant/1
+        [Authorize]
         [HttpGet("participant/{participantId}")]
         public async Task<IActionResult> GetParticipantHistory(int participantId)
         {
@@ -48,10 +52,32 @@ namespace RaceDayAPI.Controllers
                 .Where(h => h.ParticipantID == participantId)
                 .ToListAsync();
 
+
+            if (!User.IsInRole("Organiser"))
+            {
+                var userIdValue = User.FindFirst(
+                    System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+                if (!int.TryParse(userIdValue, out int userId))
+                {
+                    return Unauthorized();
+                }
+
+                var loggedInUser = await _context.Users
+                    .FirstOrDefaultAsync(u => u.UserID == userId);
+
+                if (loggedInUser?.ParticipantID != participantId)
+                {
+                    return Forbid();
+                }
+            }
+
+
             return Ok(history);
         }
 
         // POST: api/History
+        [Authorize(Roles = "Organiser")]
         [HttpPost]
         public async Task<IActionResult> CreateHistory(History newHistory)
         {

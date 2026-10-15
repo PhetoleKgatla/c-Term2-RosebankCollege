@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDayAPI.Data;
@@ -6,6 +6,7 @@ using RaceDayAPI.Models;
 
 namespace RaceDayAPI.Controllers
 {
+    [Authorize(Roles = "Organiser")]
     [Route("api/[controller]")]
     [ApiController]
     public class OrganisersController : ControllerBase

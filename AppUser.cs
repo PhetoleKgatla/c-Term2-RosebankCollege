@@ -22,5 +22,6 @@ namespace RaceDayAPI.Models
         public int? OrganiserID { get; set; }
 
         public int? ParticipantID { get; set; }
+        public bool IsApproved { get; set; } = true;
     }
 }

@@ -1,14 +1,19 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDayAPI.Data;
 using RaceDayAPI.Models;
 
+
 namespace RaceDayAPI.Controllers
 {
+    
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ParticipantsController : ControllerBase
+
     {
         private readonly RaceDayContext _context;
 
@@ -78,6 +83,7 @@ namespace RaceDayAPI.Controllers
         }
 
         // DELETE: api/Participants/1
+        [Authorize(Roles = "Organiser")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteParticipant(int id)
         {

@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDayAPI.Data;
@@ -45,6 +45,7 @@ namespace RaceDayAPI.Controllers
 
 
         // POST: api/Events
+        [Authorize(Roles = "Organiser")]
         [HttpPost]
         public async Task<IActionResult> CreateEvent(RaceEvent newEvent)
         {
@@ -59,6 +60,7 @@ namespace RaceDayAPI.Controllers
 
 
         // PUT: api/Events/3
+        [Authorize(Roles = "Organiser")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEvent(
             int id, RaceEvent updatedEvent)
@@ -86,6 +88,7 @@ namespace RaceDayAPI.Controllers
 
 
         // DELETE: api/Events/3
+        [Authorize(Roles = "Organiser")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEvent(int id)
         {

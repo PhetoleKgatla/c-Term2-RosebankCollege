@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDayAPI.Data;
@@ -41,6 +41,7 @@ namespace RaceDayAPI.Controllers
         }
 
         // POST: api/Results
+        [Authorize(Roles = "Organiser")]
         [HttpPost]
         public async Task<IActionResult> CreateResult(
             RaceResult newResult)
@@ -55,6 +56,7 @@ namespace RaceDayAPI.Controllers
         }
 
         // PUT: api/Results/1
+        [Authorize(Roles = "Organiser")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateResult(
             int id, RaceResult updatedResult)
