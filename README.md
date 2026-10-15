@@ -11,3 +11,5 @@
 12.Created Models for each entity
 13.Fixed the Data class and added Register DTO
 14.Added controllers and more models
+15.Added authentication
+    
