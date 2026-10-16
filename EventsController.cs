@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDayAPI.Data;
 using RaceDayAPI.Models;
+using RaceDayAPI.Controllers;
+using System.Threading.Tasks;
 
 namespace RaceDayAPI.Controllers
 {
@@ -105,6 +107,7 @@ namespace RaceDayAPI.Controllers
 
             return Ok("Event deleted successfully.");
         }
+
 
     }
 }
