@@ -14,3 +14,4 @@
 15.Added authentication
 16.Conducted xUnit Testing for eventController
 17.Done with xUnit Testing for EventController
+17.RaceDay SQL Code 
