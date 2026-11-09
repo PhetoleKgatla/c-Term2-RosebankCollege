@@ -24,3 +24,4 @@ Youtube link
    .updated organiser functionality added layout
 23.Added profile function
 24.added a docker 
+25.added blob storage
