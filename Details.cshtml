@@ -1,0 +1,146 @@
+﻿@model RaceDay.MVC.Models.EventModel
+@using RaceDay.MVC.Models
+
+@{
+    ViewData["Title"] = "Event Details";
+
+    var categories = ViewBag.Categories as List<CategoryModel>
+                     ?? new List<CategoryModel>();
+}
+
+<div class="container mt-4 mb-5">
+
+    <!-- Back Button -->
+    <a asp-controller="Participant"
+       asp-action="Dashboard"
+       class="btn btn-outline-secondary mb-4">
+        <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+
+    <!-- Event Heading -->
+    <div class="p-4 rounded-3 shadow-sm mb-4"
+         style="background: linear-gradient(120deg, #0d6efd, #073b78); color: white;">
+
+        <h1 class="fw-bold">@Model.EventName</h1>
+
+        <p class="mb-0">
+            Explore the event information and choose an available category.
+        </p>
+
+    </div>
+
+    <!-- Event Information -->
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header bg-white py-3">
+            <h4 class="fw-bold mb-0">Event Information</h4>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <p class="text-muted mb-1">Event Name</p>
+                    <h5>@Model.EventName</h5>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="text-muted mb-1">Event Type</p>
+                    <h5>@Model.EventType</h5>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="text-muted mb-1">Event Date</p>
+                    <h5>@Model.Date</h5>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="text-muted mb-1">Location</p>
+                    <h5>@Model.Location</h5>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="text-muted mb-1">Distance</p>
+                    <h5>@Model.Distance</h5>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="text-muted mb-1">Event ID</p>
+                    <h5>@Model.EventID</h5>
+                </div>
+
+            </div>
+
+            <hr />
+
+            <h5 class="fw-bold">Event Description</h5>
+
+            <p>@Model.Description</p>
+
+        </div>
+    </div>
+
+    <!-- Available Categories -->
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-white py-3">
+            <h4 class="fw-bold mb-0">Available Categories</h4>
+        </div>
+
+        <div class="card-body">
+
+            @if (!categories.Any())
+            {
+                <div class="alert alert-warning">
+                    No categories are currently available for this event.
+                    Please check again later or contact the organiser.
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">
+                    The following categories are available for this event.
+                </p>
+
+                <div class="row g-3">
+
+                    @foreach (var category in categories)
+                    {
+                        <div class="col-md-6 col-lg-4">
+
+                            <div class="card h-100 border shadow-sm">
+
+                                <div class="card-body">
+
+                                    <span class="badge bg-primary mb-3">
+                                        Available
+                                    </span>
+
+                                    <h5 class="fw-bold">
+                                        @category.CategoryName
+                                    </h5>
+
+                                    <p class="text-muted mb-1">
+                                        Age: @category.Age
+                                    </p>
+
+                                    <p class="text-muted mb-0">
+                                        Category ID: @category.CategoryID
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
