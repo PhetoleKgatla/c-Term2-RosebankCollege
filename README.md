@@ -26,3 +26,4 @@ Youtube link
 24.added a docker 
 25.added blob storage
 26.edited event controller to also accomodate event banners
+27.Added profile service 
