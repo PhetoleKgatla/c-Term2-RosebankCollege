@@ -1,95 +1,53 @@
-using Microsoft.EntityFrameworkCore;
-using RaceDayAPI.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using RaceDay.MVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen(options =>
+// Configure the named HttpClient for the API
+builder.Services.AddHttpClient("RaceDayAPI", client =>
 {
-    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Description = "Enter your JWT token here."
-    });
-
-    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-    {
-        {
-            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-            {
-                Reference = new Microsoft.OpenApi.Models.OpenApiReference
-                {
-                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+    client.BaseAddress = new Uri(
+        builder.Configuration["ApiSettings:BaseUrl"]!);
 });
 
+// Register custom API services for dependency injection
+builder.Services.AddScoped<EventApiService>();
 
-builder.Services.AddDbContext<RaceDayContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("RaceDayConnection")));
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
+// Register general HttpClient factory support
+builder.Services.AddHttpClient();
 
-builder.Services.AddAuthentication(
-    JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        var key = builder.Configuration["Jwt:Key"]
-            ?? throw new InvalidOperationException(
-                "JWT key is missing.");
-
-        options.TokenValidationParameters =
-            new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidIssuer =
-                    builder.Configuration["Jwt:Issuer"],
-
-                ValidateAudience = true,
-                ValidAudience =
-                    builder.Configuration["Jwt:Audience"],
-
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey =
-                    new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(key)),
-
-                ValidateLifetime = true
-            };
-    });
-
-builder.Services.AddAuthorization();
-
+// Add Session services for tracking user authentication state and roles (Step 2)
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-app.UseAuthentication();
+app.UseRouting();
+
+// Enable Session middleware (must be placed AFTER UseRouting and BEFORE UseAuthorization)
+app.UseSession();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-public partial class Program { }
