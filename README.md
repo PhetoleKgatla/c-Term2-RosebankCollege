@@ -27,3 +27,4 @@ Youtube link
 25.added blob storage
 26.edited event controller to also accomodate event banners
 27.Added profile service 
+28.Youtube link : https://youtu.be/HwKGhOpoHDI
