@@ -21,3 +21,4 @@ Youtube link
 20.Connected the MVC with API
 21.added a register and login view 
 22.Added Enrolment Feature participant can view their only own enrolroments
+   .updated organiser functionality added layout
