@@ -30,5 +30,6 @@ namespace RaceDayAPI.Models
 
         [Required]
         public int OrganiserID { get; set; }
+        public string? EventBannerUrl { get; set; }
     }
 }

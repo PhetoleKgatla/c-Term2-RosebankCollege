@@ -22,5 +22,6 @@ namespace RaceDayAPI.Models
 
             [Required]
             public int ParticipantContact { get; set; }
-        }
+        public string? ProfilePictureUrl { get; set; }
+    }
 }

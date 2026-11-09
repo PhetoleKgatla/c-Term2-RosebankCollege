@@ -1,17 +1,29 @@
-﻿namespace RaceDay.MVC.Models
+﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RaceDayAPI.Models
 {
-    public class EnrolmentModel
+    [Table("ENROLMENT")]
+    public class Enrolment
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int EnrolmentID { get; set; }
 
+        [Required]
         public int EventID { get; set; }
 
+        [Required]
         public int ParticipantID { get; set; }
 
+        [Required]
         public int OrganiserID { get; set; }
 
+        [Required]
         public int CategoryID { get; set; }
 
+        [ MaxLength(9)]
         public string EnrolDate { get; set; } = string.Empty;
     }
 }

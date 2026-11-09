@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace RaceDayAPI.Models
 {
@@ -22,10 +21,13 @@ namespace RaceDayAPI.Models
         [MaxLength(30)]
         public string ParticipantSurname { get; set; } = string.Empty;
 
-        [MaxLength(30)]
         public string? ParticipantEmail { get; set; }
 
-        [Required]
         public int ParticipantContact { get; set; }
+
+        [Required]
+        public string Role { get; set; } = "Participant";
+
+        public string? OrganiserAddress { get; set; }
     }
 }
