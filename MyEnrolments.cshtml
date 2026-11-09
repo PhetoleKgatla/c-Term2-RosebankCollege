@@ -1,0 +1,133 @@
+﻿@model IEnumerable<RaceDay.MVC.Models.EnrolmentModel>
+
+@{
+    ViewData["Title"] = "My Enrolments";
+
+    var enrolments = Model?.ToList()
+        ?? new List<RaceDay.MVC.Models.EnrolmentModel>();
+}
+
+<div class="container mt-4 mb-5">
+
+    <div class="p-4 rounded-3 shadow-sm mb-4"
+         style="background: linear-gradient(120deg, #0d6efd, #073b78); color: white;">
+
+        <h1 class="fw-bold">My Enrolments</h1>
+
+        <p class="mb-0">
+            View all the events you have successfully registered for.
+        </p>
+
+    </div>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-white py-3">
+
+            <div class="d-flex justify-content-between
+                        align-items-center flex-wrap">
+
+                <h4 class="fw-bold mb-0">
+                    My Registered Events
+                </h4>
+
+                <span class="badge bg-primary">
+                    @enrolments.Count Enrolment(s)
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            @if (!enrolments.Any())
+            {
+                <div class="alert alert-info">
+
+                    <h5>No Enrolments Yet</h5>
+
+                    <p class="mb-2">
+                        You have not registered for any events yet.
+                    </p>
+
+                    <a asp-controller="Participant"
+                       asp-action="Dashboard"
+                       class="btn btn-primary">
+                        Explore Events
+                    </a>
+
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-striped
+                                      table-hover align-middle">
+
+                        <thead class="table-light">
+
+                            <tr>
+                                <th>Enrolment ID</th>
+                                <th>Event ID</th>
+                                <th>Category ID</th>
+                                <th>Enrolment Date</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in enrolments)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @item.EnrolmentID
+                                    </td>
+
+                                    <td>
+                                        @item.EventID
+                                    </td>
+
+                                    <td>
+                                        @item.CategoryID
+                                    </td>
+
+                                    <td>
+                                        @item.EnrolDate
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-success">
+                                            Registered
+                                        </span>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+    <div class="mt-4">
+
+        <a asp-controller="Participant"
+           asp-action="Dashboard"
+           class="btn btn-outline-primary">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
