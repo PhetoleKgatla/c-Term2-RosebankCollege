@@ -1,0 +1,121 @@
+﻿@model RaceDay.MVC.Models.ParticipantProfileModel
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div class="container mt-4 mb-5">
+
+    <h2 class="fw-bold">Edit My Profile</h2>
+
+    <p class="text-muted">
+        Update your personal information below.
+    </p>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header text-white"
+             style="background-color:#073b78;">
+
+            <h5 class="mb-0">Personal Information</h5>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            <form asp-action="EditProfile" method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="All"
+                     class="text-danger mb-3">
+                </div>
+
+                <input type="hidden"
+                       asp-for="ParticipantID" />
+
+                <div class="mb-3">
+
+                    <label asp-for="ParticipantName"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="ParticipantName"
+                           class="form-control" />
+
+                    <span asp-validation-for="ParticipantName"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="ParticipantSurname"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="ParticipantSurname"
+                           class="form-control" />
+
+                    <span asp-validation-for="ParticipantSurname"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="ParticipantEmail"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="ParticipantEmail"
+                           type="email"
+                           class="form-control" />
+
+                    <span asp-validation-for="ParticipantEmail"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="ParticipantContact"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="ParticipantContact"
+                           type="number"
+                           class="form-control" />
+
+                    <span asp-validation-for="ParticipantContact"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-success">
+                    Save Changes
+                </button>
+
+                <a asp-action="Profile"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,122 @@
+﻿@model RaceDay.MVC.Models.ParticipantProfileModel
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container mt-4 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">My Profile</h2>
+            <p class="text-muted">
+                View your personal RaceDay account information.
+            </p>
+        </div>
+
+        <a asp-action="EditProfile"
+           class="btn btn-primary">
+            Edit Profile
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header text-white"
+             style="background-color:#073b78;">
+
+            <h5 class="mb-0">Participant Information</h5>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">
+                    Participant ID
+                </div>
+
+                <div class="col-md-8">
+                    @Model.ParticipantID
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">
+                    First Name
+                </div>
+
+                <div class="col-md-8">
+                    @Model.ParticipantName
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">
+                    Surname
+                </div>
+
+                <div class="col-md-8">
+                    @Model.ParticipantSurname
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">
+                    Email Address
+                </div>
+
+                <div class="col-md-8">
+                    @Model.ParticipantEmail
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">
+                    Contact Number
+                </div>
+
+                <div class="col-md-8">
+                    @Model.ParticipantContact
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Dashboard"
+           class="btn btn-outline-secondary">
+            Back to Events
+        </a>
+
+        <a asp-action="MyEnrolments"
+           class="btn btn-outline-primary">
+            My Enrolments
+        </a>
+    </div>
+
+</div>
